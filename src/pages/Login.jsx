@@ -25,9 +25,18 @@ const Login = () => {
   const bio = useInputValidation("");
   const username = useInputValidation("", usernameValidator);
   const password = useStrongPassword();
-  const avatar=useFileHandler("single", 2)
+  const avatar = useFileHandler("single", 2);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+  };
 
   return (
+    <div style={{backgroundImage:"linear-gradient(rgba(200,200,200,0.2), rgba(120,110,220,0.7))"}}>
     <Container
       component={"main"}
       maxWidth="xs"
@@ -55,6 +64,7 @@ const Login = () => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              onSubmit={handleLogin}
             >
               <TextField
                 required
@@ -62,6 +72,8 @@ const Login = () => {
                 label="Username"
                 margin="normal"
                 variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler}
               />
               <TextField
                 required
@@ -70,6 +82,8 @@ const Login = () => {
                 type="password"
                 margin="normal"
                 variant="outlined"
+                value={password.value}
+                onChange={password.changeHandler}
               />
               <Button
                 fullWidth
@@ -102,6 +116,7 @@ const Login = () => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              onSubmit={handleSignup}
             >
               <Stack position={"relative"} width={"5rem"} margin={"auto"}>
                 <Avatar
@@ -113,10 +128,10 @@ const Login = () => {
                   src={avatar.preview}
                 />
                 {avatar.error && (
-                <Typography color={"error"} variant="caption">
-                  {avatar.error}
-                </Typography>
-              )}
+                  <Typography color={"error"} variant="caption">
+                    {avatar.error}
+                  </Typography>
+                )}
                 <IconButton
                   sx={{
                     position: "absolute",
@@ -131,7 +146,10 @@ const Login = () => {
                 >
                   <>
                     <CameraAltIcon />
-                    <VisuallyHiddenInput type="file" onChange={avatar.changeHandler} />
+                    <VisuallyHiddenInput
+                      type="file"
+                      onChange={avatar.changeHandler}
+                    />
                   </>
                 </IconButton>
               </Stack>
@@ -208,6 +226,7 @@ const Login = () => {
         )}
       </Paper>
     </Container>
+    </div>
   );
 };
 
