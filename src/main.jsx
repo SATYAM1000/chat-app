@@ -7,12 +7,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
       <CssBaseline />
-      <App />
+      <div onContextMenu={e=>e.preventDefault()}>
+        <App />
+      </div>
     </HelmetProvider>
   </React.StrictMode>
 );
-
-
-
 
 // react-helmet-async library enables to manage DOM elements within the <head></head> section of react components
